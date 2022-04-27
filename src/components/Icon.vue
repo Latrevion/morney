@@ -1,7 +1,7 @@
 <template>
   <div>
     <svg class="icon">
-      <use v-bind:xlink:href="'#'+name"/>
+      <use :xlink:href="'#'+name"/>
     </svg>
   </div>
 </template>
@@ -24,9 +24,8 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-.icon{
-  width: 1em;
-  height: 1em;
+.icon {
+  width: 32px; height: 32px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
