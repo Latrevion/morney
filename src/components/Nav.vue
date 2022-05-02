@@ -31,7 +31,7 @@ export default {
 nav {
   display: flex;
   flex-direction: row;
-  box-shadow: 0 0  3px rgba(0,0,0,0.3);
+  @extend  %outerShadow;
 
    > .item {
      padding: 2px 0;
