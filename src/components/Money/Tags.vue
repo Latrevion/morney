@@ -4,34 +4,32 @@
       <button>新增标签</button>
     </div>
     <ul class="current">
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
+<li v-for="tag in dataSource" :key="tag"
+    :class="{selected:selectedTag.indexOf(tag)>=0}"
+    @click="toggle(tag)">{{tag}}
+</li>
     </ul>
   </div>
 </template>
 
 <script lang='ts'>
-export default {
-  name: 'Tags'
-};
+import Vue from 'vue';
+import {Component,Prop} from 'vue-property-decorator';
+
+@Component
+export default class Tags extends Vue{
+ @Prop(Array) dataSource:string[] | undefined;
+  selectedTag:string[]=[];
+  toggle(tag:string){
+    const index = this.selectedTag.indexOf(tag);
+    if(index>=0){
+      this.selectedTag.splice(index,1)
+    }else {
+    this.selectedTag.push(tag);
+    }
+  }
+
+}
 </script>
 
 <style scoped lang='scss'>
@@ -49,7 +47,8 @@ export default {
     overflow: auto;
 
     > li {
-      background: #d9d9d9;
+      $bg:#d9d9d9;
+      background: $bg;
       $h: 24px;
       height: $h;
       line-height: $h;
@@ -57,6 +56,10 @@ export default {
       padding: 0 16px;
       margin-right: 12px;
       margin-top: 4px;
+      &.selected{
+        background: darken($bg,50%);
+        color: #fff;
+      }
     }
   }
 
