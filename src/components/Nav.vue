@@ -22,7 +22,10 @@
 
 export default {
   name: 'NAV',
-};
+
+
+}
+
 </script>
 
 <style  lang='scss' scoped>
