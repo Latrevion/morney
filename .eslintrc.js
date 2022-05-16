@@ -1,4 +1,5 @@
 module.exports = {
+  'no-undef':'off',
   "globals": {"RecordItem": true},
   root: true,
   env: {
