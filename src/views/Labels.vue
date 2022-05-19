@@ -13,16 +13,11 @@
 </template>
 
 <script lang='ts'>
-
-
-// import Nav from '@/components/Nav.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import tagListModel from '@/models/tagListModel';
 import Button from '@/components/Button.vue';
 
 
-const tags = tagListModel.fetch();
 @Component({
   components: {Button}
 })

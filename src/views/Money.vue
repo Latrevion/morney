@@ -17,8 +17,6 @@ import FormItem from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
 import {Component, Watch} from 'vue-property-decorator';
 import recordListModel from '@/models/recordListModel';
-import tagListModel from '@/models/tagListModel';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 
 const recordList = recordListModel.fetch();
 
