@@ -21,14 +21,14 @@ import tagListModel from '@/models/tagListModel';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
+
 
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
 })
 export default class Money extends Vue {
-  tags = tagList;
+  tags = window.tagList;
   recordList: RecordItem[] = recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
