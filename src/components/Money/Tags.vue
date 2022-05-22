@@ -4,42 +4,47 @@
       <button @click="create">新增标签</button>
     </div>
     <ul class="current">
-<li v-for="tag in dataSource" :key="tag.id"
-    :class="{selected:selectedTag.indexOf(tag)>=0}"
-    @click="toggle(tag)">{{tag.name}}
-</li>
+      <li v-for="tag in tagList" :key="tag.id"
+          :class="{selected:selectedTag.indexOf(tag)>=0}"
+          @click="toggle(tag)">{{ tag.name }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script lang='ts'>
 import Vue from 'vue';
-import {Component,Prop} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
-@Component
-export default class Tags extends Vue{
- @Prop(Array) readonly dataSource:string[] | undefined;
-  selectedTag:string[]=[];
-  toggle(tag:string){
-    const index = this.selectedTag.indexOf(tag);
-    if(index>=0){
-      this.selectedTag.splice(index,1)
-    }else {
-    this.selectedTag.push(tag);
+@Component({
+  computed: {
+    tagList() {
+      // return  this.store.fetchTags();
+      return []
     }
-    this.$emit('update:value',this.selectedTag)
   }
- create(){
-    const name = window.prompt('请输入标签名')
-   if (name===''){
-     alert('标签名不能为空')
-   }else{
-      if (this.dataSource){
-          this.$emit('update:dataSource',[...this.dataSource,name])
-      }
-   }
- }
+})
+export default class Tags extends Vue {
+  selectedTag: string[] = [];
+  toggle(tag: string) {
+    const index = this.selectedTag.indexOf(tag);
+    if (index >= 0) {
+      this.selectedTag.splice(index, 1);
+    } else {
+      this.selectedTag.push(tag);
+    }
+    this.$emit('update:value', this.selectedTag);
+  }
+
+  create() {
+    const name = window.prompt('请输入标签名');
+    if (!name) {
+      return alert('标签名不能为空');
+    }
+    // store.createTag(name);
+  }
 }
+
 </script>
 
 <style scoped lang='scss'>
@@ -58,7 +63,7 @@ export default class Tags extends Vue{
     overflow: auto;
 
     > li {
-      $bg:#d9d9d9;
+      $bg: #d9d9d9;
       background: $bg;
       $h: 24px;
       height: $h;
@@ -67,8 +72,9 @@ export default class Tags extends Vue{
       padding: 0 16px;
       margin-right: 12px;
       margin-top: 4px;
-      &.selected{
-        background: darken($bg,50%);
+
+      &.selected {
+        background: darken($bg, 50%);
         color: #fff;
       }
     }

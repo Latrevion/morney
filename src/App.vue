@@ -4,6 +4,7 @@
 </div>
 </template>
 
+
 <style lang="scss">
 @import "~@/assets/style/reset.scss";
 @import "~@/assets/style/helper.scss";
@@ -17,6 +18,4 @@ body{
   font-size: 16px;
   background: #f5f5f5;
 }
-
-
 </style>
