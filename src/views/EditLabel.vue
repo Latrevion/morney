@@ -20,15 +20,18 @@ import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
 
+
 @Component({
-  components: {Button, FormItem}
+  components: {Button, FormItem},
 })
 export default class EditLabel extends Vue {
-  tag?: Tag = undefined;
+  get tag() {
+    return this.$store.state.currentTag;
+  }
 
   created() {
-    //TODO
-    // this.tag = {}//store.findTag(this.$route.params.id);
+    const id = this.$route.params.id;
+    this.$store.commit('setCurrentTag', id);
     if (!this.tag) {
       this.$router.replace('/404');
     }
@@ -37,13 +40,11 @@ export default class EditLabel extends Vue {
   update(name: string) {
     if (this.tag) {
       // store.updateTag(this.tag.id, name);
-      //TODO
     }
   }
 
   remove() {
-    if (this.tag){
-      //TODO
+    if (this.tag) {
       return
       // if (store.removeTag(this.tag.id)) {
       //   this.$router.back();
