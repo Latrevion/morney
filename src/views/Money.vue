@@ -3,9 +3,9 @@
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
     <div class="notes">
-      <FormItem filed-name="备注" @update:value="onUpdateNotes" placeholder="在这里输入备注"/>
+      <FormItem filed-name="备注"  placeholder="在这里输入备注" :value.sync="record.notes"/>
     </div>
-    <Tags/>
+    <Tags @update:valu.capture="record.tags=$event"/>
   </layout>
 </template>
 
@@ -25,16 +25,18 @@ import recordTypeList from '@/constants/recordTypeList';
 })
 
 export default class Money extends Vue {
-  get recordList(){
+  get recordList() {
     return this.$store.state.recordList;
   }
- recordTypeList = recordTypeList;
+
+  recordTypeList = recordTypeList;
 
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
-  created(){
-    this.$store.commit('fetchRecords')
+
+  created() {
+    this.$store.commit('fetchRecords');
   }
 
 
@@ -43,12 +45,20 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    this.$store.commit('createRecord',this.record);
+    if (!this.record.tags || this.record.tags.length === 0) {
+      window.alert('请至少选择一个标签');
+      return;
+    }
+    this.$store.commit('createRecord', this.record);
+    if (this.$store.state.createRecordError === null) {
+      window.alert('已保存');
+      this.record.notes = '';
+    }
   }
 }
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 
 .layout-content {
   display: flex;
