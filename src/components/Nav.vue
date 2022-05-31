@@ -38,10 +38,8 @@ nav {
      flex-direction: column;
      font-size: 12px;
      .icon{
-       //width: 32px;
-       //height: 32px;
-       width: 36px;
-       height: 36px;
+       width: 32px;
+       height: 32px;
      }
      }
 
@@ -55,7 +53,6 @@ nav {
       background-color: rgb(116,162,137);
       }
     }
-
 }
 
 
