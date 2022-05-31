@@ -1,11 +1,11 @@
 <template>
   <nav>
+    <router-link to="/labels" class="item" active-class="selected">
+      <Icon name="label"/>标签
+    </router-link>
     <router-link to="/money" class="item" active-class="selected">
       <Icon name="money"/>
       记账
-    </router-link>
-    <router-link to="/labels" class="item" active-class="selected">
-      <Icon name="label"/>标签
     </router-link>
     <router-link to="/statistics" class="item" active-class="selected">
       <Icon name="statistics"/>
@@ -15,19 +15,12 @@
 </template>
 
 <script lang='ts'>
-// import x from '@/assets/icons/label.svg';
-// import y from '@/assets/icons/money.svg';
-// console.log(x)
-
 
 export default {
   name: 'NAV',
-
-
 }
 
 </script>
-
 <style  lang='scss' scoped>
 @import "~@/assets/style/helper.scss";
 
@@ -45,13 +38,22 @@ nav {
      flex-direction: column;
      font-size: 12px;
      .icon{
-       width: 32px;
-       height: 32px;
+       //width: 32px;
+       //height: 32px;
+       width: 36px;
+       height: 36px;
      }
      }
 
     >.item.selected{
-      color:$color-highlight;
+      //color:$color-highlight;
+      color: black;
+      font-weight: bold;
+      .icon{
+        color: white;
+        border-radius: 50%;
+      background-color: rgb(116,162,137);
+      }
     }
 
 }
