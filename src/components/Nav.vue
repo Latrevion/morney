@@ -44,8 +44,7 @@ nav {
      }
 
     >.item.selected{
-      //color:$color-highlight;
-      color: black;
+      color: rgb(129,186,137);
       font-weight: bold;
       .icon{
         color: white;
