@@ -1,9 +1,10 @@
 <template>
   <layout>
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
+    <ECharts :options="x"/>
     <ol v-if="groupedList.length>0">
       <li v-for=" (group,index) in groupedList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }} <span>¥{{group.total}}</span></h3>
+        <h3 class="title">{{ beautify(group.title) }} <span>¥{{ group.total }}</span></h3>
         <ol>
           <li v-for="item in group.items" :key="item.id" class="record">
             <span>{{ tagString(item.tags) }}</span>
@@ -26,13 +27,19 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
+// import ECharts from 'vue-echarts';
+const ECharts: any = require('vue-echarts').default;
+console.log(ECharts);
+import 'echarts/lib/chart/line';
+import 'echarts/lib/component/polar';
+
 
 @Component({
-  components: {Tabs},
+  components: {Tabs, ECharts},
 })
 export default class Statistics extends Vue {
   tagString(tags: Tag[]) {
-    return tags.length === 0 ? '无' : tags.map(t=>t.name).join(',');
+    return tags.length === 0 ? '无' : tags.map(t => t.name).join(',');
   }
 
   beautify(string: string) {
@@ -49,8 +56,53 @@ export default class Statistics extends Vue {
     } else {
       return day.format('YYYY年M月D日');
     }
-
   }
+
+  get x() {
+    let data = [];
+
+    for (let i = 0; i <= 360; i++) {
+      let t = i / 180 * Math.PI;
+      let r = Math.sin(2 * t) * Math.cos(2 * t);
+      data.push([r, i]);
+    }
+
+    return {
+      title: {
+        text: '极坐标双数值轴'
+      },
+      legend: {
+        data: ['line']
+      },
+      polar: {
+        center: ['50%', '54%']
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        }
+      },
+      angleAxis: {
+        type: 'value',
+        startAngle: 0
+      },
+      radiusAxis: {
+        min: 0
+      },
+      series: [
+        {
+          coordinateSystem: 'polar',
+          name: 'line',
+          type: 'line',
+          showSymbol: false,
+          data: data
+        }
+      ],
+      animationDuration: 2000
+    };
+  }
+
 
   get recordList() {
     return (this.$store.state as RootState).recordList;
@@ -62,23 +114,23 @@ export default class Statistics extends Vue {
 
 
     const newList = clone(recordList)
-        .filter(r =>r.type ===this.type)
+        .filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
     if (newList.length === 0) {return [];}
-    type Result ={title:string , total?: number ,items: RecordItem[]}[]
-    const result:Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD') , items: [newList[0]]}];
+    type Result = { title: string, total?: number, items: RecordItem[] }[]
+    const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];
       const last = result[result.length - 1];
       if (dayjs(last.title).isSame(dayjs(current.createdAt), 'day')) {
         last.items.push(current);
       } else {
-        result.push({title: dayjs(current.createdAt).format('YYYY-MM-DD'),items: [current]});
+        result.push({title: dayjs(current.createdAt).format('YYYY-MM-DD'), items: [current]});
       }
     }
-    result.map(group=>{
-      group.total=group.items.reduce((sum,item)=>sum+item.amount,0)
-    })
+    result.map(group => {
+      group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
+    });
     return result;
   }
 
@@ -119,7 +171,7 @@ export default class Statistics extends Vue {
 }
 </style>
 <style scoped lang="scss">
-.noResult{
+.noResult {
   padding: 16px;
   text-align: center;
 }
