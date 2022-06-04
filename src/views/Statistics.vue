@@ -1,7 +1,7 @@
 <template>
   <layout>
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-    <ECharts :options="x"/>
+    <Chart :options="x"/>
     <ol v-if="groupedList.length>0">
       <li v-for=" (group,index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }} <span>¥{{ group.total }}</span></h3>
@@ -27,15 +27,11 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
-// import ECharts from 'vue-echarts';
-const ECharts: any = require('vue-echarts').default;
-console.log(ECharts);
-import 'echarts/lib/chart/line';
-import 'echarts/lib/component/polar';
+import Chart from '@/components/Chart.vue';
 
 
 @Component({
-  components: {Tabs, ECharts},
+  components: {Tabs,Chart},
 })
 export default class Statistics extends Vue {
   tagString(tags: Tag[]) {
@@ -59,47 +55,28 @@ export default class Statistics extends Vue {
   }
 
   get x() {
-    let data = [];
-
-    for (let i = 0; i <= 360; i++) {
-      let t = i / 180 * Math.PI;
-      let r = Math.sin(2 * t) * Math.cos(2 * t);
-      data.push([r, i]);
-    }
-
     return {
-      title: {
-        text: '极坐标双数值轴'
+      xAxis: {
+        type: 'category',
+        data: [
+          '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+          '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+          '21', '22', '23', '24', '25', '26', '27', '28', '29', '30',
+        ]
       },
-      legend: {
-        data: ['line']
+      yAxis: {
+        type: 'value'
       },
-      polar: {
-        center: ['50%', '54%']
-      },
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'cross'
-        }
-      },
-      angleAxis: {
-        type: 'value',
-        startAngle: 0
-      },
-      radiusAxis: {
-        min: 0
-      },
-      series: [
-        {
-          coordinateSystem: 'polar',
-          name: 'line',
-          type: 'line',
-          showSymbol: false,
-          data: data
-        }
-      ],
-      animationDuration: 2000
+      series: [{
+        data: [
+          820, 932, 901, 934, 1290, 1330, 1320,
+          820, 932, 901, 934, 1290, 1330, 1320,
+          820, 932, 901, 934, 1290, 1330, 1320,
+          820, 932, 901, 934, 1290, 1330, 1320, 1, 2
+        ],
+        type: 'line'
+      }],
+      tooltip: {show: true}
     };
   }
 
