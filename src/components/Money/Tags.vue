@@ -81,6 +81,7 @@ export default class Tags extends mixins(TagHelper) {
         background: #81ba89;
         color: #ffffff;
         font-weight: bold;
+        box-shadow: 0 0 10px rgba(0,0,0,0.25);
       }
     }
   }
