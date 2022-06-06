@@ -62,7 +62,7 @@ export default class Tags extends mixins(TagHelper) {
     justify-content: left;
 
     > li {
-
+      cursor:pointer;
       text-overflow: ellipsis;
       width: 23%;
       $bg: #f3f3f3;
