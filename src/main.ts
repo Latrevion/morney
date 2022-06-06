@@ -26,7 +26,7 @@ window.onload = function () {
 };
 
 if (document.documentElement.clientWidth > 500) {
-  window.alert('请使用手机打卡本页面，以保证浏览效果');
+  window.alert('请使用手机打开本页面，以保证浏览效果');
   const img = document.createElement('img');
   const cover = document.createElement('div');
   img.src = './qrcode.png';
