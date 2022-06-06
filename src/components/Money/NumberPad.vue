@@ -80,12 +80,19 @@ export default class NumberPad extends Vue {
 <style scoped lang='scss'>
 @import "~@/assets/style/helper.scss";
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .numberPad {
   .output {
-    font-size: 36px;
+    font-size: 30px;
     font-family: Consolas, monospace;
-    padding: 9px 16px;
+    padding: 5px 16px;
     text-align: right;
+    color: #81ba89;
     @extend %innerShadow;
     @extend %clearFix;
   }
@@ -94,22 +101,21 @@ export default class NumberPad extends Vue {
     @extend %clearFix;
 
     button {
-      width: 25%;
-      height: 64px;
+      width: calc(25% - 2px);
+      height: 52px;
       float: left;
       background: transparent;
-      border: none;
-
-      &.ok {
-        height: 64*2px;
-        float: right;
-      }
+      border: 1px solid #cacaca;
+      margin: 1px ;
+      font-size: 20px;
 
       &.zero {
-        width: 25*2%;
-      }
+        width: calc(50% - 2px);
 
-      $bg: #f2f2f2;
+      }
+      //$bg: #f2f2f2;
+      $bg: rgb(243,243,243);
+
 
       &:nth-child(1) {
         background: $bg;
@@ -117,27 +123,50 @@ export default class NumberPad extends Vue {
 
       &:nth-child(2), &:nth-child(5) {
         background: darken($bg, 4%);
+        background: $bg;
       }
 
       &:nth-child(3), &:nth-child(6), &:nth-child(9) {
         background: darken($bg, 8%);
+        background: $bg;
       }
 
       &:nth-child(4), &:nth-child(7), &:nth-child(10) {
         background: darken($bg, 12%);
+        background: $bg;
       }
 
       &:nth-child(8), &:nth-child(11), &:nth-child(13) {
         background: darken($bg, 16%);
+        background: $bg;
       }
 
       &:nth-child(14) {
         background: darken($bg, 20%);
+        background: $bg;
       }
 
       &:nth-child(12) {
         background: darken($bg, 24%);
+        background: $bg;
       }
+
+
+      &.ok {
+        height: 106px;
+        float: right;
+        background: rgb(129,186,137);
+        color: #ffffff;
+      }
+
+      &.ok:active {
+        background-color: rgb(133,161,138);
+        color: black;
+      }
+    }
+    button:active {
+      background-color: #cccccc;
+      color: white;
     }
   }
 }

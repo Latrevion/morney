@@ -8,7 +8,10 @@ const map:{[key:string]:string} = {
 @Component
 export class TagHelper extends Vue {
   createTag() {
-    const name = window.prompt('请输入标签名');
+    const name = window.prompt('请输入标签名 (不超过4个汉字)');
+    if (name!.length>4){
+      return alert('标签名太长');
+    }
     if (!name) {
       return alert('标签名不能为空');
     }

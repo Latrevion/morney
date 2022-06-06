@@ -1,13 +1,11 @@
 <template>
   <div class="tags">
-    <div class="new">
-      <button @click="createTag">新增标签</button>
-    </div>
     <ul class="current">
       <li v-for="tag in tagList" :key="tag.id"
           :class="{selected:selectedTag.indexOf(tag)>=0}"
           @click="toggle(tag)">{{ tag.name }}
       </li>
+      <li class="new" @click="createTag">新增标签</li>
     </ul>
   </div>
 </template>
@@ -49,45 +47,46 @@ export default class Tags extends mixins(TagHelper) {
 @use "sass:math";
 .tags {
   background: white;
-  font-size: 14px;
+  font-size: 16px;
   padding: 16px;
   flex-grow: 1;
   display: flex;
-  flex-direction: column-reverse;
-
+  overflow: auto;
+  align-items: start;
   > .current {
     display: flex;
+    align-items: end;
     flex-wrap: wrap;
     overflow: auto;
+    justify-content: left;
 
     > li {
-      $bg: #d9d9d9;
-      background: $bg;
-      $h: 24px;
+
+      text-overflow: ellipsis;
+      width: 23%;
+      $bg: #f3f3f3;
+      $h: 48px;
+      border: 1px solid #d3d3d3;
+      box-shadow: 1px 2px 2px #d3d3d3;
+      text-align: center;
       height: $h;
       line-height: $h;
-      border-radius: math.div($h,2);
-      padding: 0 16px;
-      margin-right: 12px;
-      margin-top: 4px;
+      border-radius: 12px;
+      padding: 0 10px;
+      margin:0 1%;
+      margin-bottom: 8px;
 
       &.selected {
         background: darken($bg, 50%);
-        color: #fff;
+        background: #81ba89;
+        color: #ffffff;
+        font-weight: bold;
       }
     }
   }
 
-  > .new {
-    padding-top: 16px;
-
-    button {
-      background: transparent;
-      border: none;
-      color: #999;
-      border-bottom: 1px solid;
-      padding: 0 4px;
-    }
+  .new{
+    font-size: 14px;
   }
 }
 </style>

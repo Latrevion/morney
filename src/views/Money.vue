@@ -49,7 +49,6 @@ export default class Money extends Vue {
     this.$store.commit('fetchRecords');
   }
 
-
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }
@@ -80,6 +79,16 @@ export default class Money extends Vue {
 </style>
 <style lang="scss" scoped>
 .notes {
-  padding: 12px 0;
+  border-bottom: 1px solid #cccccc;
+  border-top: 1px solid #cccccc;
+  padding: 2px 0;
+  background: #f3f3f3;
+  caret-color: darkgreen;
+  outline-color: #40B8FA;
+}
+.createdAt {
+  padding: 2px 0;
+  background: #f3f3f3;
+  border-bottom: 1px solid #cccccc;
 }
 </style>

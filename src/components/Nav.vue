@@ -49,7 +49,7 @@ nav {
       .icon{
         color: white;
         border-radius: 50%;
-      background-color: rgb(116,162,137);
+        background-color: rgb(116,162,137);
       }
     }
 }
