@@ -54,6 +54,7 @@ export default class Tags extends mixins(TagHelper) {
   overflow: auto;
   align-items: start;
   > .current {
+    flex-grow: 1;
     display: flex;
     align-items: end;
     flex-wrap: wrap;
