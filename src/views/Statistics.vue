@@ -6,7 +6,7 @@
     </div>
     <ol v-if="groupedList.length>0">
       <li v-for=" (group,index) in groupedList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }} <span>¥{{ group.total }}</span></h3>
+        <h3 class="title">{{ beautify(group.title) }} <span>共¥{{ group.total }}</span></h3>
         <ol>
           <li v-for="item in group.items" :key="item.id" class="record">
             <span>{{ tagString(item.tags) }}</span>
@@ -115,7 +115,7 @@ export default class Statistics extends Vue {
       series: [{
         symbol: 'circle',
         symbolSize: 15,
-        itemStyle: {borderWidth: 1, color: '#666', borderColor: '#666'},
+        itemStyle: {borderWidth: 1, color: '#0d966d', borderColor: '#666'},
         data: values,
         type: 'line'
       }],
@@ -177,14 +177,19 @@ export default class Statistics extends Vue {
   display: flex;
   justify-content: space-between;
   align-content: center;
+  background:#f3f3f3;
 }
 
 .title {
   @extend %item;
+  background:white;
+  margin-top: 8px;
 }
 
 .record {
   background: white;
+  border: 1px solid #cacaca;
+  border-top: none;
   @extend %item;
 }
 
@@ -200,7 +205,8 @@ export default class Statistics extends Vue {
 
   &-wrapper {
     overflow: auto;
-
+    border: 1px solid #cccccc;
+    background: white;
     &::-webkit-scrollbar {
       display: none
     }
@@ -215,11 +221,15 @@ export default class Statistics extends Vue {
 
 ::v-deep .type-tabs-item {
 
-
-  background: #c4c4c4;
+  color: #81ba89;
+  background: #e3ecec;
+  border-bottom: 1px solid black;
 
   &.selected {
-    background: #ffffff;
+    color: #ffffff;
+    background: #81ba89;
+    border-bottom:none;
+    font-weight: bold;
 
     &::after {
       display: none;
