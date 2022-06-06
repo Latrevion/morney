@@ -7,7 +7,7 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <Button class="createTag" @click="createTag">新建标签</Button>
+      <Button class="createTag" @click="createTag">新增标签</Button>
     </div>
   </layout>
 </template>
@@ -67,6 +67,7 @@ export default class Labels extends mixins(TagHelper) {
   height: 40px;
   padding: 0 16px;
   box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  cursor:pointer;
   &-wrapper {
     text-align: center;
     padding: 16px;

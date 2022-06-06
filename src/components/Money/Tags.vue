@@ -74,7 +74,8 @@ export default class Tags extends mixins(TagHelper) {
       line-height: $h;
       border-radius: 12px;
       padding: 0 10px;
-      margin:0 1%;
+      margin-left: 1%;
+      margin-right:1%;
       margin-bottom: 8px;
 
       &.selected {
@@ -89,6 +90,8 @@ export default class Tags extends mixins(TagHelper) {
 
   .new{
     font-size: 14px;
+    color: forestgreen;
+    border: 1px solid  forestgreen!important;
   }
 }
 </style>
